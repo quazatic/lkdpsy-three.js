@@ -8,7 +8,7 @@ export default function getStarfield({numStars = 500} = {}) {
   // Create a background sphere to map the Milky Way texture
   const starBgGeometry = new THREE.SphereGeometry(100, 64, 64);  // Large sphere for the background
   const starBgMaterial = new THREE.MeshBasicMaterial({
-    map: new THREE.TextureLoader().load('./public/8k_stars_milky_way.jpg'),
+    map: new THREE.TextureLoader().load('/8k_stars_milky_way.jpg'),
     side: THREE.BackSide, // Render the inside of the sphere
     transparent: true,     // Enable transparency
     opacity: 0.25           // Set opacity (0.0 is fully transparent, 1.0 is fully opaque)
@@ -46,7 +46,7 @@ export default function getStarfield({numStars = 500} = {}) {
   const mat = new THREE.PointsMaterial({
     size: 0.25,
     vertexColors: true,
-    map: new THREE.TextureLoader().load("./public/circle.png"),
+    map: new THREE.TextureLoader().load("/circle.png"),
   });
 
   const starfield = new THREE.Points(geo, mat);

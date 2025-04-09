@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import getStarfield, { twinkleStars } from './src/getStarfield';
-import { getFresnelMat } from './src/fresnelShader.js';
+import getStarfield, { twinkleStars } from './getStarfield.js';
+import { getFresnelMat } from './fresnelShader.js';
 
 // Create scene and camera
 const w = window.innerWidth;
@@ -12,7 +12,7 @@ const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
 // Renderer for the scene
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(w, h);
-document.body.appendChild(renderer.domElement);
+document.getElementById("main-content").appendChild(renderer.domElement);
 
 // Geometry and mesh for the Earth
 const detail = 32;
@@ -21,18 +21,18 @@ const geometry = new THREE.IcosahedronGeometry(1, detail);
 
 // Day texture material with alpha test for dynamic lighting
 const dayMaterial = new THREE.MeshStandardMaterial({
-    map: loader.load("./public/8k_earth_daymap.jpg"),
+    map: loader.load("/8k_earth_daymap.jpg"),
 });
 
 // Night texture material with custom blending
 const nightMaterial = new THREE.MeshBasicMaterial({
-    map: loader.load("./public/8k_earth_nightmap.jpg"),
+    map: loader.load("/8k_earth_nightmap.jpg"),
     blending: THREE.AdditiveBlending,
     opacity: 0.8,
 });
 
 const cloudsMaterial = new THREE.MeshStandardMaterial({
-    map: loader.load("./public/8k_earth_clouds.jpg"),
+    map: loader.load("/8k_earth_clouds.jpg"),
     transparent: true,
     opacity: 0.86,
     blending: THREE.AdditiveBlending,
@@ -40,8 +40,6 @@ const cloudsMaterial = new THREE.MeshStandardMaterial({
 });
 
 const fresnelMat = getFresnelMat();
-
-
 
 // Create earth group and apply tilt
 const earthMesh = new THREE.Mesh(geometry, dayMaterial);
@@ -86,7 +84,6 @@ function animate() {
 
     // Make stars twinkle
     twinkleStars(starfield.geometry);
-
     controls.update();
     renderer.render(scene, camera);
 }
