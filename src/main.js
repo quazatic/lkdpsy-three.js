@@ -7,7 +7,7 @@ import { getFresnelMat } from './fresnelShader.js';
 const w = window.innerWidth;
 const h = window.innerHeight;
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(90, w / h, 0.1, 1000);
 
 // Renderer for the scene
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -65,7 +65,7 @@ sunLight.position.set(-3, 0.5, 0.8);
 scene.add(sunLight);
 
 // Camera controls
-camera.position.z = 5;
+camera.position.z = 1.65;
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.minDistance = 1.5;
 controls.maxDistance = 90;
